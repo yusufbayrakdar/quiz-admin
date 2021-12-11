@@ -1,69 +1,60 @@
-import React, { useEffect, useState } from "react";
-import { Layout, Menu, Row } from "antd";
-import { useSelector } from "react-redux";
-import Link from "next/link";
+import React from "react";
+import { Layout, Menu } from "antd";
 import { useRouter } from "next/router";
 
-import { RootState } from "../../redux/configureStore";
-import { Route } from "../../utils";
-import useRedux from "../../hooks/useRedux";
+import { BASE_ENDPOINT, Route } from "../../utils";
+import { QuestionCircleOutlined, FormOutlined } from "@ant-design/icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-} from "@ant-design/icons";
+  faUserGraduate,
+  faChalkboardTeacher,
+} from "@fortawesome/free-solid-svg-icons";
 
 const { Sider } = Layout;
 
 function CustomSider() {
   const router = useRouter();
-  const { dispatchAction, $ } = useRedux();
-
-  const toggleUserInfo = () => {
-    dispatchAction($.TOGGLE_USER_INFO);
-  };
-
-  const loggedIn = useSelector((state: RootState) => state.auth.loggedIn);
-  const userInfoVisible = useSelector(
-    (state: RootState) => state.auth.userInfoVisible
-  );
-  const [currentRoute, setCurrentRoute] = useState(1);
-
-  useEffect(
-    () =>
-      setCurrentRoute(
-        Number(routes.find((r) => r.path.includes(router.pathname))?.order)
-      ),
-    [router.pathname]
-  );
-
-  const routes: Array<Route> = [
-    { path: "/", title: "ANA SAYFA", order: 1 },
-    { path: "/signin", title: "GİRİŞ YAP", order: 3 },
-    { path: "/signup", title: "KAYDOL", order: 4 },
-  ];
 
   if ("/signin" === router.pathname) return null;
 
+  let selectedKey = "";
+  const endpointValues = Object.values(BASE_ENDPOINT);
+  for (let i = 0; i < endpointValues.length; i++) {
+    if (router.pathname === endpointValues[i]) {
+      selectedKey = `${i}`;
+      break;
+    }
+  }
+
   return (
     <Sider theme="light">
-      <Menu mode="inline" defaultSelectedKeys={["1"]}>
+      <Menu mode="inline" defaultSelectedKeys={[selectedKey]}>
         <Menu.Item
-          key="1"
-          icon={<UserOutlined />}
-          onClick={() => router.push("/instructors?page=1")}
+          key="0"
+          icon={<FontAwesomeIcon icon={faChalkboardTeacher} />}
+          onClick={() => router.push(`${BASE_ENDPOINT.instructor}?page=1`)}
         >
           Eğitmenler
         </Menu.Item>
-        <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+        <Menu.Item
+          key="1"
+          icon={<FontAwesomeIcon icon={faUserGraduate} />}
+          onClick={() => router.push(`${BASE_ENDPOINT.student}?page=1`)}
+        >
           Öğrenciler
         </Menu.Item>
-        <Menu.Item key="3" icon={<UploadOutlined />}>
+        <Menu.Item
+          key="2"
+          icon={<QuestionCircleOutlined />}
+          onClick={() => router.push(`${BASE_ENDPOINT.question}?page=1`)}
+        >
           Sorular
         </Menu.Item>
-        <Menu.Item key="4" icon={<UploadOutlined />}>
+        <Menu.Item
+          key="3"
+          icon={<FormOutlined />}
+          onClick={() => router.push(`${BASE_ENDPOINT.quiz}?page=1`)}
+        >
           Denemeler
         </Menu.Item>
       </Menu>

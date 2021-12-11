@@ -64,4 +64,7 @@ export const routes = {
 
 export const BASE_ENDPOINT = {
   instructor: "/instructors",
+  student: "/students",
+  question: "/questions",
+  quiz: "/quizzes",
 };
