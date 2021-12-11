@@ -23,12 +23,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/ideas.png" />
       </Head>
 
-      <main>
-        {/* <h1 className="text-center text-4xl font-bold text-blue-900">
-          BilsemIQ'e Hoşgeldiniz
-        </h1> */}
-        <img src="ideas.png" alt="ideas" />
-      </main>
+      <main></main>
     </div>
   );
 };

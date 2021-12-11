@@ -50,7 +50,11 @@ function CustomSider() {
   return (
     <Sider theme="light">
       <Menu mode="inline" defaultSelectedKeys={["1"]}>
-        <Menu.Item key="1" icon={<UserOutlined />}>
+        <Menu.Item
+          key="1"
+          icon={<UserOutlined />}
+          onClick={() => router.push("/instructors?page=1")}
+        >
           Eğitmenler
         </Menu.Item>
         <Menu.Item key="2" icon={<VideoCameraOutlined />}>

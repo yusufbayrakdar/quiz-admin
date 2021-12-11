@@ -61,3 +61,7 @@ export const routes = {
     order: 4,
   },
 };
+
+export const BASE_ENDPOINT = {
+  instructor: "/instructors",
+};

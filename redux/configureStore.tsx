@@ -5,11 +5,11 @@ import { all } from "redux-saga/effects";
 import authReducer from "./auth/authReducer";
 import authSaga from "./auth/authSaga";
 
-import rendezvousReducer from "./rendezvous/rendezvousReducer";
-import rendezvousSaga from "./rendezvous/rendezvousSaga";
+import instructorReducer from "./instructors/instructorReducer";
+import instructorSaga from "./instructors/instructorSaga";
 
 const combinedSagas = function* () {
-  yield all([authSaga(), rendezvousSaga()]);
+  yield all([authSaga(), instructorSaga()]);
 };
 
 declare global {
@@ -23,7 +23,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  rendezvous: rendezvousReducer,
+  instructor: instructorReducer,
 });
 
 export const store = createStore(

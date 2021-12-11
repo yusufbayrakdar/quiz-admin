@@ -1,6 +1,12 @@
 import { TOKEN } from "../utils";
 import _fetch from "./CustomHttpService";
 
+class Query {
+  search: string;
+  isActive: boolean;
+  page: string;
+  limit: string;
+}
 class Api {
   // GET request
   _doGet = (endpoint: string) => {
@@ -46,8 +52,20 @@ class Api {
     });
   };
 
-  getRendezvous = () => {
-    return this._doGet("/rendezvous");
+  objectToQueryString(obj: any) {
+    if (typeof obj !== "object") return "";
+
+    var str = [];
+    for (var p in obj)
+      if (obj.hasOwnProperty(p) && obj[p]) {
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+      }
+    return str.join("&") ? "?" + str.join("&") : "";
+  }
+
+  getInstructors = (payload: Query) => {
+    const query = this.objectToQueryString(payload);
+    return this._doGetWithAuth(`/instructors${query}`);
   };
 
   getRendezvousAdmin = () => {
