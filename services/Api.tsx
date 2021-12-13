@@ -68,12 +68,13 @@ class Api {
     return this._doGetWithAuth(`/instructors${query}`);
   };
 
-  getRendezvousAdmin = () => {
-    return this._doGetWithAuth("/rendezvous/admin");
+  getInstructorDetail = (payload: Query) => {
+    return this._doGetWithAuth(`/instructors/${payload}`);
   };
 
-  takeRendezvous = (payload: object) => {
-    return this._doPostWithAuth("/rendezvous", payload);
+  getStudents = (payload: Query) => {
+    const query = this.objectToQueryString(payload);
+    return this._doGetWithAuth(`/students${query}`);
   };
 
   login = (payload: object) => {

@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <CustomHeader />
             <Layout className="flex flex-col h-full">
               <CustomSider />
-              <Content className="flex-1 flex items-center justify-center relative">
+              <Content className="flex-1 flex justify-center relative mt-10 mb-10">
                 <Component {...pageProps} />
                 <CustomDrawer />
               </Content>

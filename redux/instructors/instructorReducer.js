@@ -1,12 +1,14 @@
 import * as $ from "../actionTypes";
 
 const initialState = {
+  instructor: null,
+
   instructors: [],
   totalInstructors: 0,
   instructorsLoading: false,
 };
 
-export default function rendezvousReducer(
+export default function instructorReducer(
   state = initialState,
   { type, payload }
 ) {
@@ -21,6 +23,18 @@ export default function rendezvousReducer(
         ...state,
         instructors: payload.instructors,
         totalInstructors: payload.totalInstructors,
+        instructorsLoading: false,
+      };
+
+    case $.GET_INSTRUCTOR_DETAIL:
+      return {
+        ...state,
+        instructorsLoading: true,
+      };
+    case $.SET_INSTRUCTOR_DETAIL:
+      return {
+        ...state,
+        instructor: payload,
         instructorsLoading: false,
       };
     default:

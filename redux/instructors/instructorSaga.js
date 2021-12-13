@@ -15,6 +15,18 @@ const tryGetInstructorsSaga = function* ({ payload }) {
   }
 };
 
+const tryGetInstructorDetailSaga = function* ({ payload }) {
+  try {
+    const { data } = yield call(Api.getInstructorDetail, payload);
+
+    yield put($A($.SET_INSTRUCTOR_DETAIL, data));
+  } catch (error) {
+    yield put($A($.SET_INSTRUCTOR_DETAIL, null));
+    showErrorMessage("Could not get instructor");
+  }
+};
+
 export default function* instructorSaga() {
   yield takeEvery($.GET_INSTRUCTORS, tryGetInstructorsSaga);
+  yield takeEvery($.GET_INSTRUCTOR_DETAIL, tryGetInstructorDetailSaga);
 }

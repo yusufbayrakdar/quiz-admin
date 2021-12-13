@@ -1,15 +1,17 @@
 import { useRouter } from "next/router";
+import Link from "next/link";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import useRedux from "../hooks/useRedux";
-import { RootState } from "../redux/configureStore";
-import CustomTable from "../components/CustomTable";
-import { BASE_ENDPOINT } from "../utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheckCircle,
   faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
+
+import useRedux from "../../hooks/useRedux";
+import { RootState } from "../../redux/configureStore";
+import CustomTable from "../../components/CustomTable";
+import { BASE_ENDPOINT } from "../../utils";
 
 const defaultPageSize = 20;
 
@@ -30,24 +32,27 @@ function instructors() {
 
   const search = query["search"];
   const isActive = query["isActive"];
-  const pageQuery = query["page"];
-  const limitQuery = query["limit"] || defaultPageSize;
+  const page = query["page"];
+  const limit = query["limit"] || defaultPageSize;
 
   useEffect(() => {
     dispatchAction($.GET_INSTRUCTORS, {
-      page: pageQuery,
-      limit: limitQuery,
+      page,
+      limit,
       search,
       isActive,
     });
-  }, [dispatchAction, $, pageQuery, limitQuery, search, isActive]);
+  }, [dispatchAction, $, page, limit, search, isActive]);
 
   const columns = [
     {
       title: "Eğitmen",
       dataIndex: "firstName",
-      render: (firstName: string, { lastName }: any) =>
-        `${firstName} ${lastName}`,
+      render: (firstName: string, { lastName, _id }: any) => (
+        <Link href={`${BASE_ENDPOINT.instructor}/${_id}`}>
+          <a className="text-blue-500 hover:text-blue-700">{`${firstName} ${lastName}`}</a>
+        </Link>
+      ),
     },
     {
       title: "Telefon",
