@@ -15,7 +15,7 @@ import CustomTable from "../../components/CustomTable";
 import ConfirmButton from "../../components/ConfirmButton";
 import { BASE_ENDPOINT, capitalizeFirstLetter } from "../../utils";
 
-const defaultPageSize = 20;
+const defaultPageSize = 10;
 
 function instructors() {
   const router = useRouter();

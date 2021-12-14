@@ -8,7 +8,7 @@ import { RootState } from "../../redux/configureStore";
 import CustomTable from "../../components/CustomTable";
 import { BASE_ENDPOINT, capitalizeFirstLetter } from "../../utils";
 
-const defaultPageSize = 20;
+const defaultPageSize = 10;
 
 function InstructorDetail() {
   const router = useRouter();

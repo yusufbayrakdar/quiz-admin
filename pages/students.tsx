@@ -8,7 +8,7 @@ import useRedux from "../hooks/useRedux";
 import { RootState } from "../redux/configureStore";
 import { BASE_ENDPOINT, capitalizeFirstLetter } from "../utils";
 
-const defaultPageSize = 20;
+const defaultPageSize = 10;
 
 function students() {
   const router = useRouter();
@@ -24,7 +24,6 @@ function students() {
   );
 
   const search = query["search"];
-  const isActive = query["isActive"];
   const page = query["page"];
   const limit = query["limit"] || defaultPageSize;
 
