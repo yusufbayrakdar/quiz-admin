@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Popconfirm } from "antd";
+import { Button, Popconfirm, Row } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import useRedux from "../../hooks/useRedux";
@@ -36,17 +36,19 @@ export default function ConfirmButton({
       placement="left"
     >
       <Button
-        className="text-gray-200 focus:text-white hover:text-white rounded-full w-24"
+        className="text-gray-200 focus:text-white hover:text-white rounded-full w-28 flex justify-center"
         style={{
           backgroundColor: confirm ? "red" : "#52c41a",
         }}
         onClick={() => setVisible(true)}
       >
-        {children || "Onayla"}
-        <FontAwesomeIcon
-          icon={confirm ? faTimes : faCheck}
-          className="w-10 ml-2"
-        />
+        <Row>
+          {children || "Onayla"}
+          <FontAwesomeIcon
+            icon={confirm ? faTimes : faCheck}
+            className="w-4 ml-2 "
+          />
+        </Row>
       </Button>
     </Popconfirm>
   );
