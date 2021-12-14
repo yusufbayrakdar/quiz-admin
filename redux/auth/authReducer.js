@@ -2,10 +2,10 @@ import * as $ from "../actionTypes";
 
 const initialState = {
   loggedIn: false,
-  user: null,
+  staff: null,
   loginInProgress: false,
   autoLoginInLoading: false,
-  userInfoVisible: false,
+  staffInfoVisible: false,
 };
 
 export default function authReducer(state = initialState, { type, payload }) {
@@ -17,12 +17,12 @@ export default function authReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         loginInProgress: false,
-        user: payload,
+        staff: payload,
         loggedIn: true,
       };
 
     case $.LOGIN_FAILURE:
-      return { ...state, loginInProgress: false, loggedIn: false, user: null };
+      return { ...state, loginInProgress: false, loggedIn: false, staff: null };
 
     case $.AUTO_LOGIN_REQUEST:
       return { ...state, autoLoginInLoading: true };
@@ -31,7 +31,7 @@ export default function authReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         autoLoginInLoading: false,
-        user: payload,
+        staff: payload,
         loggedIn: true,
       };
 
@@ -40,13 +40,7 @@ export default function authReducer(state = initialState, { type, payload }) {
         ...state,
         autoLoginInLoading: false,
         loggedIn: false,
-        user: null,
-      };
-
-    case $.TOGGLE_USER_INFO:
-      return {
-        ...state,
-        userInfoVisible: payload || !state.userInfoVisible,
+        staff: null,
       };
 
     case $.LOGOUT_REQUEST:
@@ -55,7 +49,7 @@ export default function authReducer(state = initialState, { type, payload }) {
         autoLoginInLoading: false,
         loggedIn: false,
         loginInProgress: false,
-        user: null,
+        staff: null,
       };
 
     default:

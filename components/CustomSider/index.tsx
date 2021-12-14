@@ -31,14 +31,14 @@ function CustomSider() {
       <Menu mode="inline" defaultSelectedKeys={[selectedKey]}>
         <Menu.Item
           key="0"
-          icon={<FontAwesomeIcon icon={faChalkboardTeacher} />}
+          icon={<FontAwesomeIcon icon={faChalkboardTeacher} width={18} />}
           onClick={() => router.push(`${BASE_ENDPOINT.instructor}?page=1`)}
         >
           Eğitmenler
         </Menu.Item>
         <Menu.Item
           key="1"
-          icon={<FontAwesomeIcon icon={faUserGraduate} />}
+          icon={<FontAwesomeIcon icon={faUserGraduate} width={15} />}
           onClick={() => router.push(`${BASE_ENDPOINT.student}?page=1`)}
         >
           Öğrenciler

@@ -7,10 +7,9 @@ import "tailwindcss/tailwind.css";
 import { store } from "../redux/configureStore";
 import Container from "../components/Container";
 import CustomHeader from "../components/CustomHeader";
-import CustomDrawer from "../components/CustomDrawer";
 import CustomSider from "../components/CustomSider";
 
-const { Content, Sider } = Layout;
+const { Content } = Layout;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -21,9 +20,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             <CustomHeader />
             <Layout className="flex flex-col h-full">
               <CustomSider />
-              <Content className="flex-1 flex justify-center relative mt-10 mb-10">
+              <Content className="flex-1 flex justify-center">
                 <Component {...pageProps} />
-                <CustomDrawer />
               </Content>
             </Layout>
           </Layout>

@@ -31,8 +31,8 @@ function SignIn() {
   return (
     <div className="bg-blue-500 h-full w-screen flex justify-center items-center">
       <Head>
-        <title>Giriş</title>
-        <meta name="description" content="BilsemIQ giriş sayfası" />
+        <title>Admin - Giriş</title>
+        <meta name="description" content="Admin giriş sayfası" />
         <link rel="icon" href="/ideas.png" />
       </Head>
       <Form

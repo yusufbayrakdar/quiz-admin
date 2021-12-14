@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Head from "next/head";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,7 +12,8 @@ import {
 import useRedux from "../../hooks/useRedux";
 import { RootState } from "../../redux/configureStore";
 import CustomTable from "../../components/CustomTable";
-import { BASE_ENDPOINT } from "../../utils";
+import ConfirmButton from "../../components/ConfirmButton";
+import { BASE_ENDPOINT, capitalizeFirstLetter } from "../../utils";
 
 const defaultPageSize = 20;
 
@@ -49,8 +51,10 @@ function instructors() {
       title: "Eğitmen",
       dataIndex: "firstName",
       render: (firstName: string, { lastName, _id }: any) => (
-        <Link href={`${BASE_ENDPOINT.instructor}/${_id}`}>
-          <a className="text-blue-500 hover:text-blue-700">{`${firstName} ${lastName}`}</a>
+        <Link href={`${BASE_ENDPOINT.instructor}/${_id}?page=1`}>
+          <a className="text-blue-500 hover:text-blue-700">
+            {capitalizeFirstLetter(`${firstName} ${lastName}`)}
+          </a>
         </Link>
       ),
     },
@@ -69,13 +73,32 @@ function instructors() {
             color: confirmed ? "#52c41a" : "gray",
           }}
           icon={confirmed ? faCheckCircle : faTimesCircle}
+          width={20}
         />
+      ),
+    },
+    {
+      title: "",
+      dataIndex: "confirmed",
+      render: (confirmed: boolean, { _id }: any) => (
+        <ConfirmButton
+          _id={_id}
+          refreshActions={[$.GET_INSTRUCTORS]}
+          confirm={confirmed}
+        >
+          {confirmed ? "Iptal Et" : "Onayla"}
+        </ConfirmButton>
       ),
     },
   ];
 
   return (
     <div className=" w-10/12">
+      <Head>
+        <title>Admin - Eğitmenler</title>
+        <meta name="description" content="Admin - Eğitmenler" />
+        <link rel="icon" href="/ideas.png" />
+      </Head>
       <CustomTable
         dataSource={instructors}
         loading={instructorsLoading}

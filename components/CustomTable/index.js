@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "antd";
+import { Card, Table } from "antd";
 import { useRouter } from "next/router";
 
 export default function BykTable({
@@ -35,35 +35,37 @@ export default function BykTable({
     }${search ? "&search=" + search : ""}`;
   }
   return (
-    <Table
-      columns={columns}
-      size={"small"}
-      dataSource={dataSource}
-      loading={loading}
-      pagination={{
-        hideOnSinglePage,
-        position: ["bottomCenter", "bottomRight"],
-        total: totalDocuments,
-        defaultCurrent: pagination.page,
-        current: pagination.page,
-        showQuickJumper: true,
-        pageSize: pagination.pageSize,
-        onShowSizeChange: (current, pageSize) => {
-          setPagination({ pageSize });
-          router.push(getUrl(current, pageSize));
-        },
+    <Card className="mt-10">
+      <Table
+        columns={columns}
+        size={"small"}
+        dataSource={dataSource}
+        loading={loading}
+        pagination={{
+          hideOnSinglePage,
+          position: ["bottomCenter", "bottomRight"],
+          total: totalDocuments,
+          defaultCurrent: pagination.page,
+          current: pagination.page,
+          showQuickJumper: true,
+          pageSize: pagination.pageSize,
+          onShowSizeChange: (current, pageSize) => {
+            setPagination({ pageSize });
+            router.push(getUrl(current, pageSize));
+          },
 
-        showTotal: (total, range) => (
-          <div style={{ color: "gray" }}>{`Total: ${total}`}</div>
-        ),
-        onChange: (current, pageSize) => {
-          setPagination({ page: current, pageSize });
-          router.push(getUrl(current, pageSize));
-        },
-        showSizeChanger: true,
-      }}
-      rowKey="_id"
-      {...props}
-    />
+          showTotal: (total, range) => (
+            <div style={{ color: "gray" }}>{`Total: ${total}`}</div>
+          ),
+          onChange: (current, pageSize) => {
+            setPagination({ page: current, pageSize });
+            router.push(getUrl(current, pageSize));
+          },
+          showSizeChanger: true,
+        }}
+        rowKey="_id"
+        {...props}
+      />
+    </Card>
   );
 }

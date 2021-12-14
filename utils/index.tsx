@@ -5,7 +5,7 @@ message.config({
   maxCount: 2,
 });
 
-export const TOKEN = "bilsemiq-token";
+export const TOKEN = "bilsemai-token";
 
 export const $A = (type: string, payload: any) => ({
   type,

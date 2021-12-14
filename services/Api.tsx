@@ -72,6 +72,14 @@ class Api {
     return this._doGetWithAuth(`/instructors/${payload}`);
   };
 
+  confirmInstructor = (_id: string) => {
+    return this._doGetWithAuth(`/instructors/${_id}/confirm`);
+  };
+
+  cancelInstructor = (_id: string) => {
+    return this._doGetWithAuth(`/instructors/${_id}/cancel`);
+  };
+
   getStudents = (payload: Query) => {
     const query = this.objectToQueryString(payload);
     return this._doGetWithAuth(`/students${query}`);
@@ -87,10 +95,6 @@ class Api {
 
   autoLogin = () => {
     return this._doGetWithAuth("/staffs/profile");
-  };
-
-  emailConfirm = (userId: string) => {
-    return this._doGetWithAuth(`/users/${userId}/confirm`);
   };
 }
 

@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Layout, Menu, Row } from "antd";
+import React from "react";
+import { Dropdown, Layout, Menu, Row } from "antd";
 import { useSelector } from "react-redux";
 import { UserOutlined } from "@ant-design/icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { RootState } from "../../redux/configureStore";
-import { Route } from "../../utils";
 import useRedux from "../../hooks/useRedux";
-import MenuItem from "../MenuItem";
 
 const { Header } = Layout;
 
@@ -16,55 +16,48 @@ function CustomHeader() {
   const router = useRouter();
   const { dispatchAction, $ } = useRedux();
 
-  const toggleUserInfo = () => {
-    dispatchAction($.TOGGLE_USER_INFO);
-  };
-
   const loggedIn = useSelector((state: RootState) => state.auth.loggedIn);
-  const userInfoVisible = useSelector(
-    (state: RootState) => state.auth.userInfoVisible
-  );
-  const [currentRoute, setCurrentRoute] = useState(1);
-
-  useEffect(
-    () =>
-      setCurrentRoute(
-        Number(routes.find((r) => r.path.includes(router.pathname))?.order)
-      ),
-    [router.pathname]
-  );
-
-  const routes: Array<Route> = [
-    { path: "/", title: "BilsemIQ", order: 1 },
-    { path: "/signin", title: "GİRİŞ YAP", order: 3 },
-    { path: "/signup", title: "KAYDOL", order: 4 },
-  ];
+  const staff = useSelector((state: RootState) => state.auth.staff);
 
   if ("/signin" === router.pathname) return null;
 
+  const menu = (
+    <Menu>
+      <Menu.Item key="0">
+        <span>Şifre Değiştir</span>
+      </Menu.Item>
+      <Menu.Item key="1" onClick={() => dispatchAction($.LOGOUT_REQUEST)}>
+        <Link href="/signin">Çıkış Yap</Link>
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
     <Header className="relative bg-blue-600">
-      <Row className="flex flex-1">
+      <Row className="flex flex-1 relative">
         <Link href="/">
-          <p className="font-bold text-gray-100 font-sans text-2xl text-center flex justify-center items-center cursor-pointer">
-            BilsemIQ
+          <p className="font-bold text-gray-100 font-sans text-2xl text-center flex justify-center items-center cursor-pointer mt-4">
+            BilsemAI
           </p>
         </Link>
-        <Menu
-          theme="light"
-          mode="horizontal"
-          selectedKeys={[String(currentRoute)]}
-          className="flex flex-1 justify-end"
-          style={{ backgroundColor: "rgba(0,0,0,0)" }}
-        >
-          {!loggedIn && <MenuItem link="/signin" title="GİRİŞ YAP" />}
-          {!loggedIn && <MenuItem link="/signup" title="KAYDOL" />}
-          {loggedIn && (
-            <MenuItem onClick={toggleUserInfo} active={userInfoVisible}>
-              <UserOutlined style={{ fontSize: 20 }} />
-            </MenuItem>
-          )}
-        </Menu>
+        {loggedIn && (
+          <Dropdown overlay={menu} trigger={["click"]}>
+            <div className=" absolute right-10 top-2 pl-4 pr-4 h-12 flex items-center cursor-pointer">
+              <UserOutlined
+                className="text-lg w-10 h-10 flex justify-center items-center rounded-full"
+                style={{ backgroundColor: "rgba(255,255,255,0.7)" }}
+              />
+              <span className="ml-2 mr-2 text-gray-100 select-none">
+                {staff?.nickname}
+              </span>
+              <FontAwesomeIcon
+                className="text-gray-100"
+                icon={faChevronDown}
+                width={18}
+              />
+            </div>
+          </Dropdown>
+        )}
       </Row>
     </Header>
   );

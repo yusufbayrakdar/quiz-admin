@@ -1,11 +1,12 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import Head from "next/head";
 
 import CustomTable from "../components/CustomTable";
 import useRedux from "../hooks/useRedux";
 import { RootState } from "../redux/configureStore";
-import { BASE_ENDPOINT } from "../utils";
+import { BASE_ENDPOINT, capitalizeFirstLetter } from "../utils";
 
 const defaultPageSize = 20;
 
@@ -40,12 +41,12 @@ function students() {
       title: "Öğrenci",
       dataIndex: "firstName",
       render: (firstName: string, { lastName }: any) =>
-        `${firstName} ${lastName}`,
+        capitalizeFirstLetter(`${firstName} ${lastName}`),
     },
     {
       title: "Telefon",
       dataIndex: "phone",
-      render: (phone: string) => `(${phone.slice(0, 3)}) ${phone.slice(4)}`,
+      render: (phone: string) => `(${phone?.slice(0, 3)}) ${phone?.slice(4)}`,
     },
     {
       title: "İlk Şifre",
@@ -55,6 +56,11 @@ function students() {
 
   return (
     <div className=" w-10/12">
+      <Head>
+        <title>Admin - Öğrenciler</title>
+        <meta name="description" content="Öğrenciler" />
+        <link rel="icon" href="/ideas.png" />
+      </Head>
       <CustomTable
         dataSource={students}
         loading={studentsLoading}

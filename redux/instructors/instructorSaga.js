@@ -26,7 +26,39 @@ const tryGetInstructorDetailSaga = function* ({ payload }) {
   }
 };
 
+const tryConfirmInstructorSaga = function* ({ payload }) {
+  try {
+    const { _id, refreshActions } = payload;
+    yield call(Api.confirmInstructor, _id);
+
+    if (refreshActions) {
+      for (const action of refreshActions) {
+        yield put($A(action));
+      }
+    }
+  } catch (error) {
+    showErrorMessage("Eğitmen onaylanamadı");
+  }
+};
+
+const tryCancelInstructorSaga = function* ({ payload }) {
+  try {
+    const { _id, refreshActions } = payload;
+    yield call(Api.cancelInstructor, _id);
+
+    if (refreshActions) {
+      for (const action of refreshActions) {
+        yield put($A(action));
+      }
+    }
+  } catch (error) {
+    showErrorMessage("Eğitmen iptal edilemedi");
+  }
+};
+
 export default function* instructorSaga() {
   yield takeEvery($.GET_INSTRUCTORS, tryGetInstructorsSaga);
   yield takeEvery($.GET_INSTRUCTOR_DETAIL, tryGetInstructorDetailSaga);
+  yield takeEvery($.CONFIRM_INSTRUCTOR, tryConfirmInstructorSaga);
+  yield takeEvery($.CANCEL_INSTRUCTOR, tryCancelInstructorSaga);
 }

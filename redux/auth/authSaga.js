@@ -8,10 +8,10 @@ const tryLoginSaga = function* ({ payload }) {
   try {
     localStorage.setItem(TOKEN, "");
     const { data } = yield call(Api.login, payload);
-    const { tokenstaff, user } = data;
+    const { tokenstaff, staff } = data;
 
     localStorage.setItem(TOKEN, tokenstaff);
-    yield put($A($.LOGIN_SUCCESS, user));
+    yield put($A($.LOGIN_SUCCESS, staff));
   } catch (error) {
     showErrorMessage("Hatalı giriş");
     yield put($A($.LOGIN_FAILURE));
