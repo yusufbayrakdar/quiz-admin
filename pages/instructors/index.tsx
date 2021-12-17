@@ -13,6 +13,7 @@ import useRedux from "../../hooks/useRedux";
 import { RootState } from "../../redux/configureStore";
 import CustomTable from "../../components/CustomTable";
 import ConfirmButton from "../../components/ConfirmButton";
+import BykTableHeaderBar from "../../components/BykTableHeaderBar";
 import { BASE_ENDPOINT, capitalizeFirstLetter } from "../../utils";
 
 const defaultPageSize = 10;
@@ -33,18 +34,20 @@ function instructors() {
   );
 
   const search = query["search"];
-  const isActive = query["isActive"];
+  const confirmed = query["confirmed"];
   const page = query["page"];
   const limit = query["limit"] || defaultPageSize;
+  const hasPhone = query["hasPhone"];
 
   useEffect(() => {
     dispatchAction($.GET_INSTRUCTORS, {
       page,
       limit,
       search,
-      isActive,
+      confirmed,
+      hasPhone,
     });
-  }, [dispatchAction, $, page, limit, search, isActive]);
+  }, [dispatchAction, $, page, limit, search, confirmed, hasPhone]);
 
   const columns = [
     {
@@ -99,6 +102,11 @@ function instructors() {
         <meta name="description" content="Admin - Eğitmenler" />
         <link rel="icon" href="/ideas.png" />
       </Head>
+      <BykTableHeaderBar
+        baseEndpoint={BASE_ENDPOINT.instructor}
+        hideCreate={true}
+        showConfirmedFilter={true}
+      />
       <CustomTable
         dataSource={instructors}
         loading={instructorsLoading}

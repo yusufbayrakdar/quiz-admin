@@ -6,6 +6,7 @@ import Head from "next/head";
 import CustomTable from "../components/CustomTable";
 import useRedux from "../hooks/useRedux";
 import { RootState } from "../redux/configureStore";
+import BykTableHeaderBar from "../components/BykTableHeaderBar";
 import { BASE_ENDPOINT, capitalizeFirstLetter } from "../utils";
 
 const defaultPageSize = 10;
@@ -26,14 +27,16 @@ function students() {
   const search = query["search"];
   const page = query["page"];
   const limit = query["limit"] || defaultPageSize;
+  const hasPhone = query["hasPhone"];
 
   useEffect(() => {
     dispatchAction($.GET_STUDENTS, {
       page,
       limit,
       search,
+      hasPhone,
     });
-  }, [dispatchAction, $, page, limit, search]);
+  }, [dispatchAction, $, page, limit, search, hasPhone]);
 
   const columns = [
     {
@@ -45,7 +48,8 @@ function students() {
     {
       title: "Telefon",
       dataIndex: "phone",
-      render: (phone: string) => `(${phone?.slice(0, 3)}) ${phone?.slice(4)}`,
+      render: (phone: string) =>
+        phone ? `(${phone?.slice(0, 3)}) ${phone?.slice(4)}` : "",
     },
     {
       title: "İlk Şifre",
@@ -60,6 +64,11 @@ function students() {
         <meta name="description" content="Öğrenciler" />
         <link rel="icon" href="/ideas.png" />
       </Head>
+      <BykTableHeaderBar
+        baseEndpoint={BASE_ENDPOINT.instructor}
+        hideCreate={true}
+        showPhoneFilter={true}
+      />
       <CustomTable
         dataSource={students}
         loading={studentsLoading}

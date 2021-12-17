@@ -35,8 +35,7 @@ export default function BykTable({
     }${search ? "&search=" + search : ""}`;
   }
   return (
-    // TODO: mb olmadı gibi görünüyor
-    <Card className="mt-10 mb-10">
+    <Card>
       <Table
         columns={columns}
         size={"small"}
