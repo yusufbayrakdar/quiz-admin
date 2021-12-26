@@ -44,6 +44,26 @@ class Api {
     });
   };
 
+  // PUT request
+  _doPut = (endpoint: string, body: object, isFormData = false) => {
+    return _fetch({
+      method: "PUT",
+      body,
+      endpoint,
+      isFormData,
+    });
+  };
+
+  _doPutWithAuth = (endpoint: string, body: object, isFormData = false) => {
+    return _fetch({
+      method: "PUT",
+      body,
+      endpoint,
+      headers: { tokenstaff: localStorage.getItem(TOKEN) },
+      isFormData,
+    });
+  };
+
   _doDeleteWithAuth = (endpoint: string) => {
     return _fetch({
       method: "DELETE",
@@ -95,6 +115,23 @@ class Api {
 
   autoLogin = () => {
     return this._doGetWithAuth("/staffs/profile");
+  };
+
+  getShapes = (payload: Query) => {
+    const query = this.objectToQueryString(payload);
+    return this._doGetWithAuth(`/shapes${query}`);
+  };
+
+  getShapeDetail = (_id: string) => {
+    return this._doGetWithAuth(`/shapes/${_id}`);
+  };
+
+  createShape = (payload: { images: Array<string>; stringTag: string }) => {
+    return this._doPostWithAuth("/shapes", payload);
+  };
+
+  updateShape = (payload: { images: Array<string>; stringTag: string }) => {
+    return this._doPutWithAuth("/shapes", payload);
   };
 }
 

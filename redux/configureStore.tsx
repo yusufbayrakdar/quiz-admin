@@ -11,8 +11,20 @@ import instructorSaga from "./instructors/instructorSaga";
 import studentReducer from "./students/studentReducer";
 import studentSaga from "./students/studentSaga";
 
+import questionReducer from "./questions/questionReducer";
+import questionSaga from "./questions/questionSaga";
+
+import shapeReducer from "./shapes/shapeReducer";
+import shapeSaga from "./shapes/shapeSaga";
+
 const combinedSagas = function* () {
-  yield all([authSaga(), instructorSaga(), studentSaga()]);
+  yield all([
+    authSaga(),
+    instructorSaga(),
+    studentSaga(),
+    questionSaga(),
+    shapeSaga(),
+  ]);
 };
 
 declare global {
@@ -28,6 +40,8 @@ const rootReducer = combineReducers({
   auth: authReducer,
   instructor: instructorReducer,
   student: studentReducer,
+  question: questionReducer,
+  shape: shapeReducer,
 });
 
 export const store = createStore(

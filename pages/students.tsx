@@ -65,7 +65,7 @@ function students() {
         <link rel="icon" href="/ideas.png" />
       </Head>
       <BykTableHeaderBar
-        baseEndpoint={BASE_ENDPOINT.instructor}
+        baseEndpoint={BASE_ENDPOINT.student}
         hideCreate={true}
         showPhoneFilter={true}
       />

@@ -96,7 +96,7 @@ function instructors() {
   ];
 
   return (
-    <div className=" w-10/12">
+    <div className="w-10/12">
       <Head>
         <title>Admin - Eğitmenler</title>
         <meta name="description" content="Admin - Eğitmenler" />
