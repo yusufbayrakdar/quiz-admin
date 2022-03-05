@@ -103,4 +103,5 @@ export const BASE_ENDPOINT = {
   question: "/questions",
   quiz: "/quizzes",
   shape: "/shapes",
+  settings: "/settings",
 };

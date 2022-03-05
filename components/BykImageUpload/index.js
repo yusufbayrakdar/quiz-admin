@@ -3,7 +3,6 @@ import { Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import path from "path";
 import { firebaseStorage } from "../../firebase";
-import { showErrorMessage } from "../../utils";
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {

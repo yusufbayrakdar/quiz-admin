@@ -9,6 +9,8 @@ import Container from "../components/Container";
 import CustomHeader from "../components/CustomHeader";
 import CustomSider from "../components/CustomSider";
 
+import "../styles/global.css";
+
 const { Content } = Layout;
 
 function MyApp({ Component, pageProps }: AppProps) {

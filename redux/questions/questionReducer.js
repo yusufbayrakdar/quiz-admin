@@ -2,6 +2,9 @@ import * as $ from "../actionTypes";
 
 const initialState = {
   questions: [],
+  durations: [],
+  categories: [],
+  grades: [],
   totalQuestions: 0,
   questionsLoading: false,
   resetForm: false,
@@ -24,6 +27,15 @@ export default function questionReducer(
         totalQuestions: payload.totalQuestions,
         questionsLoading: false,
       };
+
+    case $.GET_QUESTION_CONFIGS_FINISHED:
+      return {
+        ...state,
+        categories: payload.categories,
+        durations: payload.durations,
+        grades: payload.grades,
+      };
+
     default:
       return state;
   }

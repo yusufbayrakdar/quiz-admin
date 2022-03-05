@@ -133,6 +133,46 @@ class Api {
   updateShape = (payload: { images: Array<string>; stringTag: string }) => {
     return this._doPutWithAuth("/shapes", payload);
   };
+
+  createDuration = (duration: string) => {
+    return this._doPostWithAuth("/questions/create-duration", { duration });
+  };
+
+  createCategory = (category: string) => {
+    return this._doPostWithAuth("/questions/create-category", { category });
+  };
+
+  createGrade = (grade: string) => {
+    return this._doPostWithAuth("/questions/create-grade", { grade });
+  };
+
+  getQuestionConfigs = () => {
+    return this._doGetWithAuth(`/questions/configs?all=true`);
+  };
+
+  activateDuration = (_id: string) => {
+    return this._doGetWithAuth(`/questions/activate-duration/${_id}`);
+  };
+
+  deactivateDuration = (_id: string) => {
+    return this._doGetWithAuth(`/questions/deactivate-duration/${_id}`);
+  };
+
+  activateCategory = (_id: string) => {
+    return this._doGetWithAuth(`/questions/activate-category/${_id}`);
+  };
+
+  deactivateCategory = (_id: string) => {
+    return this._doGetWithAuth(`/questions/deactivate-category/${_id}`);
+  };
+
+  activateGrade = (_id: string) => {
+    return this._doGetWithAuth(`/questions/activate-grade/${_id}`);
+  };
+
+  deactivateGrade = (_id: string) => {
+    return this._doGetWithAuth(`/questions/deactivate-grade/${_id}`);
+  };
 }
 
 export default new Api();

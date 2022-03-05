@@ -8,6 +8,7 @@ import {
   FormOutlined,
   UnorderedListOutlined,
   PlusCircleOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -60,6 +61,13 @@ function CustomSider() {
             Oluştur
           </Menu.Item>
         </SubMenu>
+        <Menu.Item
+          key={`${BASE_ENDPOINT.settings}`}
+          icon={<SettingOutlined />}
+          onClick={() => router.push(`${BASE_ENDPOINT.settings}`)}
+        >
+          Ayarlar
+        </Menu.Item>
         <Menu.Item
           key={BASE_ENDPOINT.quiz}
           icon={<FormOutlined />}
