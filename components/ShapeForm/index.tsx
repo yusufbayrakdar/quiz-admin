@@ -7,7 +7,7 @@ import useRedux from "../../hooks/useRedux";
 import { RootState } from "../../redux/configureStore";
 import BykImageUpload from "../../components/BykImageUpload";
 
-function ShapeCreate({ _id }: { _id: any }) {
+function ShapeForm({ _id }: { _id: any }) {
   const { dispatchAction, $ } = useRedux();
   const [form] = Form.useForm();
 
@@ -119,4 +119,4 @@ function ShapeCreate({ _id }: { _id: any }) {
   );
 }
 
-export default ShapeCreate;
+export default ShapeForm;

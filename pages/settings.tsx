@@ -127,7 +127,7 @@ function settings() {
   };
 
   const renderDurations = () =>
-    durations.reduce((prepared: any, current: any) => {
+    durations?.reduce((prepared: any, current: any) => {
       prepared.push(
         renderSettingsItem(
           current.duration,
@@ -142,7 +142,7 @@ function settings() {
     }, []);
 
   const renderCategories = () =>
-    categories.reduce((prepared: any, current: any) => {
+    categories?.reduce((prepared: any, current: any) => {
       prepared.push(
         renderSettingsItem(
           current.category,
@@ -156,7 +156,7 @@ function settings() {
     }, []);
 
   const renderGrades = () =>
-    grades.reduce((prepared: any, current: any) => {
+    grades?.reduce((prepared: any, current: any) => {
       prepared.push(
         renderSettingsItem(
           current.grade,
