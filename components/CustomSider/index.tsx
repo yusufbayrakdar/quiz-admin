@@ -9,6 +9,7 @@ import {
   UnorderedListOutlined,
   PlusCircleOutlined,
   SettingOutlined,
+  CodeOutlined,
 } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -62,6 +63,13 @@ function CustomSider() {
           </Menu.Item>
         </SubMenu>
         <Menu.Item
+          key={BASE_ENDPOINT.quiz}
+          icon={<FormOutlined />}
+          onClick={() => router.push(`${BASE_ENDPOINT.quiz}?page=1`)}
+        >
+          Denemeler
+        </Menu.Item>
+        <Menu.Item
           key={`${BASE_ENDPOINT.settings}`}
           icon={<SettingOutlined />}
           onClick={() => router.push(`${BASE_ENDPOINT.settings}`)}
@@ -69,11 +77,11 @@ function CustomSider() {
           Ayarlar
         </Menu.Item>
         <Menu.Item
-          key={BASE_ENDPOINT.quiz}
-          icon={<FormOutlined />}
-          onClick={() => router.push(`${BASE_ENDPOINT.quiz}?page=1`)}
+          key={`${BASE_ENDPOINT.software}`}
+          icon={<CodeOutlined />}
+          onClick={() => router.push(`${BASE_ENDPOINT.software}`)}
         >
-          Denemeler
+          Sofware
         </Menu.Item>
       </Menu>
     </Sider>

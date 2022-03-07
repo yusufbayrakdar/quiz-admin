@@ -173,6 +173,10 @@ class Api {
   deactivateGrade = (_id: string) => {
     return this._doGetWithAuth(`/questions/deactivate-grade/${_id}`);
   };
+
+  syncSearches = () => {
+    return this._doGetWithAuth(`/searches/sync-all`);
+  };
 }
 
 export default new Api();

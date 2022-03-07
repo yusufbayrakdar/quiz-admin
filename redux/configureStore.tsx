@@ -17,6 +17,8 @@ import questionSaga from "./questions/questionSaga";
 import shapeReducer from "./shapes/shapeReducer";
 import shapeSaga from "./shapes/shapeSaga";
 
+import softwareSaga from "./software/softwareSaga";
+
 const combinedSagas = function* () {
   yield all([
     authSaga(),
@@ -24,6 +26,7 @@ const combinedSagas = function* () {
     studentSaga(),
     questionSaga(),
     shapeSaga(),
+    softwareSaga(),
   ]);
 };
 

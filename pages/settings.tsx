@@ -1,5 +1,6 @@
 import { Button, Card, Col, Form, Input, Row, Tooltip } from "antd";
 import moment from "moment";
+import Head from "next/head";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import useRedux from "../hooks/useRedux";
@@ -171,6 +172,11 @@ function settings() {
 
   return (
     <Card className=" w-10/12 rounded-xl mt-10 mb-10 pl-4">
+      <Head>
+        <title>Admin - Ayarlar</title>
+        <meta name="description" content="Ayarlar" />
+        <link rel="icon" href="/ideas.png" />
+      </Head>
       <Form form={form} autoComplete="off" layout="vertical">
         <Info
           title="Sınav Süresi Seçenekleri"
