@@ -4,6 +4,7 @@ import Head from "next/head";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
   faCheckCircle,
   faTimesCircle,
@@ -15,6 +16,9 @@ import CustomTable from "../../components/CustomTable";
 import ConfirmButton from "../../components/ConfirmButton";
 import BykTableHeaderBar from "../../components/BykTableHeaderBar";
 import { BASE_ENDPOINT, capitalizeFirstLetter } from "../../utils";
+
+const faCheckCircleIP = faCheckCircle as IconProp;
+const faTimesCircleIP = faTimesCircle as IconProp;
 
 const defaultPageSize = 10;
 
@@ -75,7 +79,7 @@ function instructors() {
             marginLeft: 5,
             color: confirmed ? "#52c41a" : "gray",
           }}
-          icon={confirmed ? faCheckCircle : faTimesCircle}
+          icon={confirmed ? faCheckCircleIP : faTimesCircleIP}
           width={20}
         />
       ),

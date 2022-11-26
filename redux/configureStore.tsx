@@ -17,6 +17,9 @@ import questionSaga from "./questions/questionSaga";
 import shapeReducer from "./shapes/shapeReducer";
 import shapeSaga from "./shapes/shapeSaga";
 
+import quizReducer from "./quiz/quizReducer";
+import quizSaga from "./quiz/quizSaga";
+
 import softwareSaga from "./software/softwareSaga";
 
 const combinedSagas = function* () {
@@ -27,6 +30,7 @@ const combinedSagas = function* () {
     questionSaga(),
     shapeSaga(),
     softwareSaga(),
+    quizSaga(),
   ]);
 };
 
@@ -45,6 +49,7 @@ const rootReducer = combineReducers({
   student: studentReducer,
   question: questionReducer,
   shape: shapeReducer,
+  quiz: quizReducer,
 });
 
 export const store = createStore(

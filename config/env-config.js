@@ -3,7 +3,7 @@ const ENVIRONMENT = {
   STAGING: "staging",
   PRODUCTION: "production",
 };
-const APP: { [key: string]: string } = {
+const APP = {
   development: `http://localhost:5000`,
   staging: `https://bilsemiq-api.herokuapp.com`,
   production: `https://bilsemai.herokuapp.com`,

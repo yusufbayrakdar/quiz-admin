@@ -1,16 +1,18 @@
 import { put, call, takeEvery, takeLatest } from "redux-saga/effects";
 import * as $ from "../actionTypes";
 import Api from "../../services/Api";
-import { $A, showErrorMessage, TOKEN } from "../../utils";
+import { $A, SHADOWTOKEN, showErrorMessage, TOKEN } from "../../utils";
 import router from "next/router";
 
 const tryLoginSaga = function* ({ payload }) {
   try {
     localStorage.setItem(TOKEN, "");
+    localStorage.setItem(SHADOWTOKEN, "");
     const { data } = yield call(Api.login, payload);
-    const { tokenstaff, staff } = data;
+    const { tokenstaff, tokeninstructor, staff } = data;
 
     localStorage.setItem(TOKEN, tokenstaff);
+    localStorage.setItem(SHADOWTOKEN, tokeninstructor);
     yield put($A($.LOGIN_SUCCESS, staff));
   } catch (error) {
     showErrorMessage("Hatalı giriş");

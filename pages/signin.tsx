@@ -70,7 +70,7 @@ function SignIn() {
           <Button
             type="primary"
             htmlType="submit"
-            className="absolute right-0 top-0 pr-10 pl-10"
+            className="bg-secondPrimary absolute right-0 top-0 pr-10 pl-10"
           >
             Giriş Yap
           </Button>

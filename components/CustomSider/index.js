@@ -62,13 +62,46 @@ function CustomSider() {
             Oluştur
           </Menu.Item>
         </SubMenu>
-        <Menu.Item
-          key={BASE_ENDPOINT.quiz}
-          icon={<FormOutlined />}
-          onClick={() => router.push(`${BASE_ENDPOINT.quiz}?page=1`)}
+        <Menu.SubMenu
+          key="questions-submenu"
+          icon={<QuestionCircleOutlined />}
+          title="Sorular"
         >
-          Denemeler
-        </Menu.Item>
+          <Menu.Item
+            key={BASE_ENDPOINT.question}
+            icon={<UnorderedListOutlined />}
+            onClick={() => router.push(`${BASE_ENDPOINT.question}?page=1`)}
+          >
+            Liste
+          </Menu.Item>
+          <Menu.Item
+            key={`${BASE_ENDPOINT.question}/form/create`}
+            icon={<PlusCircleOutlined />}
+            onClick={() => router.push(`${BASE_ENDPOINT.question}/form/create`)}
+          >
+            Oluştur
+          </Menu.Item>
+        </Menu.SubMenu>
+        <Menu.SubMenu
+          key="quizzes-submenu"
+          title="Denemeler"
+          icon={<FormOutlined />}
+        >
+          <Menu.Item
+            key={BASE_ENDPOINT.quiz}
+            icon={<UnorderedListOutlined />}
+            onClick={() => router.push(`${BASE_ENDPOINT.quiz}?page=1`)}
+          >
+            Liste
+          </Menu.Item>
+          <Menu.Item
+            key={`${BASE_ENDPOINT.quiz}/form/create`}
+            icon={<PlusCircleOutlined />}
+            onClick={() => router.push(`${BASE_ENDPOINT.quiz}/form/create`)}
+          >
+            Oluştur
+          </Menu.Item>
+        </Menu.SubMenu>
         <Menu.Item
           key={`${BASE_ENDPOINT.settings}`}
           icon={<SettingOutlined />}

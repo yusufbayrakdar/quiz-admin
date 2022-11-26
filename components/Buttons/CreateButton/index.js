@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Row } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 
-function BykCreateButton({
+function CreateButton({
   style = {},
   onClick,
   shape,
@@ -18,13 +18,14 @@ function BykCreateButton({
       style={style}
       type="primary"
       onClick={onClick}
+      className="bg-secondPrimary"
     >
-      <Row className="flex items-center">
-        <PlusCircleOutlined className="mr-2" />
+      <Row style={{ display: "flex", alignItems: "center" }}>
+        <PlusCircleOutlined style={{ marginRight: 8 }} />
         {children || "Oluştur"}
       </Row>
     </Button>
   );
 }
 
-export default BykCreateButton;
+export default CreateButton;

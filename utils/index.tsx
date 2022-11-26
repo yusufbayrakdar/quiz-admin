@@ -1,4 +1,5 @@
 import { message } from "antd";
+import moment from "moment";
 
 message.config({
   duration: 3,
@@ -6,6 +7,7 @@ message.config({
 });
 
 export const TOKEN = "bilsemai-token";
+export const SHADOWTOKEN = "bilsemai-shadow-token";
 
 export const $A = (type: string, payload: any) => ({
   type,
@@ -78,23 +80,40 @@ export const updateQueryString = (
   }
 };
 
-export const routes = {
-  "/": {
-    title: "ANA SAYFA",
-    order: 1,
-  },
-  "/rendezvouses": {
-    title: "RANDEVU",
-    order: 2,
-  },
-  "/signup": {
-    title: "KAYDOL",
-    order: 3,
-  },
-  "/signin": {
-    title: "GİRİŞ YAP",
-    order: 4,
-  },
+export const displayFullName = (item: any) =>
+  item
+    ? `${item.firstName || ""}${item.lastName ? " " + item.lastName : ""}`
+    : "";
+
+export const displayDuration = (duration: any) => {
+  const date = moment.utc(Number(duration) * 1000);
+  return date?.isValid() ? date.format("mm:ss") : duration;
+};
+
+export const displayDate = (date: Date) => {
+  const momentDate = moment.utc(date);
+  return momentDate?.isValid() ? momentDate.format("DD/MM/YYYY") : date;
+};
+
+export const shuffle = (array: Array<any>) => {
+  if (!array) throw new Error("Invalid array");
+
+  let currentIndex = array.length,
+    randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex--);
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
 };
 
 export const BASE_ENDPOINT = {

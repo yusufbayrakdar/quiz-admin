@@ -5,12 +5,12 @@ import { Button, Input } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPhone } from "@fortawesome/free-solid-svg-icons";
 
-import BykCreateButton from "../Buttons/BykCreateButton";
+import CreateButton from "../Buttons/CreateButton";
 import { updateQueryString } from "../../utils";
 
 const { Search } = Input;
 
-const BykTableHeaderBar = ({
+const TableHeaderBar = ({
   baseEndpoint,
   hideCreate,
   searchPlaceholder = "Ara...",
@@ -113,7 +113,7 @@ const BykTableHeaderBar = ({
         {hideCreate ? null : (
           <Col>
             <Divider type={"vertical"}></Divider>
-            <BykCreateButton onClick={onCreate} />
+            <CreateButton onClick={onCreate} />
             <Divider type={"vertical"}></Divider>
           </Col>
         )}
@@ -121,4 +121,4 @@ const BykTableHeaderBar = ({
     </Card>
   );
 };
-export default BykTableHeaderBar;
+export default TableHeaderBar;

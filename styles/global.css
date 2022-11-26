@@ -1,3 +1,52 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.check-icon {
+  clip-path: polygon(19% 39%, 11% 49%, 46% 80%, 85% 21%, 74% 15%, 44% 55%);
+}
+
+.cross-icon {
+  clip-path: polygon(
+    0 0,
+    0 29%,
+    34% 52%,
+    0 100%,
+    33% 100%,
+    53% 70%,
+    100% 100%,
+    100% 71%,
+    69% 49%,
+    100% 0,
+    71% 0,
+    48% 32%
+  );
+}
+
+@font-face {
+  font-family: Gilroy-Medium;
+  src: url(/fonts/Gilroy-Medium.ttf) format("opentype");
+}
+@font-face {
+  font-family: Gilroy-Bold;
+  src: url(/fonts/Gilroy-Bold.ttf) format("opentype");
+}
+
+.gBold {
+  font-family: Gilroy-Bold;
+}
+
+.gMed {
+  font-family: Gilroy-Medium;
+}

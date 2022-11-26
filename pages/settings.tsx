@@ -30,13 +30,16 @@ function settings() {
   ) => {
     return (
       <Tooltip
+        key={`tooltip-${_id}`}
         placement="topLeft"
         title={`${isActive ? "AKTİF" : "AKTİF DEĞİL"}.
          Değiştirmek için tıklayınız`}
       >
         <div
           className={`text-center rounded-xl pl-4 pr-4 ml-2 mb-2 cursor-pointer select-none ${
-            isActive ? "text-black bg-white" : "bg-gray-400 text-white"
+            isActive
+              ? "text-black bg-transparentWhite"
+              : "bg-deepDarkGray text-white"
           }`}
           onClick={() => (isActive ? deactivate(_id) : activate(_id))}
         >
@@ -58,7 +61,7 @@ function settings() {
         style={{ marginTop: largePadding ? 44 : 36, zIndex: 1, ...style }}
       >
         <div
-          className={`absolute text-white pl-${paddingConstant} pr-${paddingConstant} pb-${paddingConstant} pt-${
+          className={`pl-3 absolute text-white pl-${paddingConstant} pr-${paddingConstant} pb-${paddingConstant} pt-${
             paddingConstant / 4
           } gBold rounded-xl font-extrabold`}
           style={{
@@ -72,7 +75,9 @@ function settings() {
         >
           {title}
         </div>
-        <div style={{ zIndex: 2 }}>{children}</div>
+        <div style={{ zIndex: 2 }} className="bg-gray rounded-lg p-3">
+          {children}
+        </div>
       </div>
     );
   }
@@ -116,6 +121,7 @@ function settings() {
   };
 
   const deactivateCategory = (_id: string) => {
+    console.log("🤯 _id", _id);
     dispatchAction($.DEACTIVATE_CATEGORY, _id);
   };
 
@@ -171,19 +177,14 @@ function settings() {
     }, []);
 
   return (
-    <Card className=" w-10/12 rounded-xl mt-10 mb-10 pl-4">
+    <Card className="w-10/12 rounded-xl mt-10 mb-10 pl-4 flex flex-col justify-center">
       <Head>
         <title>Admin - Ayarlar</title>
         <meta name="description" content="Ayarlar" />
         <link rel="icon" href="/ideas.png" />
       </Head>
       <Form form={form} autoComplete="off" layout="vertical">
-        <Info
-          title="Sınav Süresi Seçenekleri"
-          largePadding
-          width="50%"
-          style={{ marginBottom: 80 }}
-        >
+        <Info title="Sınav Süresi Seçenekleri" largePadding width="50%">
           <DataContainer>{renderDurations()}</DataContainer>
           <Row className="mt-2">
             <Col>
@@ -197,7 +198,7 @@ function settings() {
             </Col>
             <Col>
               <Button
-                className="rounded-xl ml-2"
+                className="rounded-xl ml-2 bg-secondPrimary"
                 type="primary"
                 onClick={saveNewDuration}
               >
@@ -216,7 +217,7 @@ function settings() {
             </Col>
             <Col>
               <Button
-                className="rounded-xl ml-2"
+                className="rounded-xl ml-2 bg-secondPrimary"
                 type="primary"
                 onClick={saveNewCategory}
               >
@@ -235,7 +236,7 @@ function settings() {
             </Col>
             <Col>
               <Button
-                className="rounded-xl ml-2"
+                className="rounded-xl ml-2 bg-secondPrimary"
                 type="primary"
                 onClick={saveNewGrade}
               >

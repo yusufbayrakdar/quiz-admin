@@ -1,4 +1,4 @@
-import { TOKEN } from "../utils";
+import { SHADOWTOKEN, TOKEN } from "../utils";
 import _fetch from "./CustomHttpService";
 
 class Query {
@@ -40,6 +40,20 @@ class Api {
       body,
       endpoint,
       headers: { tokenstaff: localStorage.getItem(TOKEN) },
+      isFormData,
+    });
+  };
+
+  _doPostWithShadowAuth = (
+    endpoint: string,
+    body: object,
+    isFormData = false
+  ) => {
+    return _fetch({
+      method: "POST",
+      body,
+      endpoint,
+      headers: { token: localStorage.getItem(SHADOWTOKEN) },
       isFormData,
     });
   };
@@ -100,6 +114,10 @@ class Api {
     return this._doGetWithAuth(`/instructors/${_id}/cancel`);
   };
 
+  signupInstructor = (payload: object) => {
+    return this._doPost("/auth/register/instructor", payload);
+  };
+
   getStudents = (payload: Query) => {
     const query = this.objectToQueryString(payload);
     return this._doGetWithAuth(`/students${query}`);
@@ -107,10 +125,6 @@ class Api {
 
   login = (payload: object) => {
     return this._doPost("/auth/login-staff", payload);
-  };
-
-  signupInstructor = (payload: object) => {
-    return this._doPost("/auth/register/instructor", payload);
   };
 
   autoLogin = () => {
@@ -150,6 +164,23 @@ class Api {
     return this._doGetWithAuth(`/questions/configs?all=true`);
   };
 
+  getQuestionList = (payload: any) => {
+    const query = this.objectToQueryString(payload);
+    return this._doGetWithAuth(`/searches${query}`);
+  };
+
+  createQuestion = (question: any) => {
+    return this._doPostWithAuth(`/questions`, question);
+  };
+
+  updateQuestion = (question: any) => {
+    return this._doPutWithAuth(`/questions`, question);
+  };
+
+  deleteQuestion = (_id: string) => {
+    return this._doDeleteWithAuth(`/questions/${_id}`);
+  };
+
   activateDuration = (_id: string) => {
     return this._doGetWithAuth(`/questions/activate-duration/${_id}`);
   };
@@ -176,6 +207,42 @@ class Api {
 
   syncSearches = () => {
     return this._doGetWithAuth(`/searches/sync-all`);
+  };
+
+  createQuiz = (quiz: any) => {
+    return this._doPostWithShadowAuth(`/quizzes`, quiz);
+  };
+
+  updateQuiz = (quiz: any) => {
+    return this._doPutWithAuth(`/quizzes/admin`, quiz);
+  };
+
+  deleteQuiz = (_id: string) => {
+    return this._doDeleteWithAuth(`/quizzes/${_id}`);
+  };
+
+  getQuizList = (payload: any) => {
+    const query = this.objectToQueryString(payload);
+    return this._doGetWithAuth(`/quizzes/admin${query}`);
+  };
+
+  getQuizDetail = ({ _id, ...queryObject }: any) => {
+    const query = this.objectToQueryString(queryObject);
+    return this._doGetWithAuth(`/quizzes/${_id}${query}`);
+  };
+
+  finishQuiz = (payload: any) => {
+    return this._doPostWithAuth("/quizzes/finish", payload);
+  };
+
+  getStudentsOfQuiz = (_id: string) => {
+    return this._doGetWithAuth(`/quizzes/admin/${_id}/students`);
+  };
+
+  assignQuizToStudent = (quiz: { _id: string; students: Array<any> }) => {
+    return this._doPostWithAuth(`/quizzes/${quiz._id}/assign-by-admin`, {
+      students: quiz.students,
+    });
   };
 }
 
